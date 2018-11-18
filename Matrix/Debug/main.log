@@ -1,0 +1,6 @@
+﻿  main.cpp
+  Matrix.cpp
+  Создание кода...
+c:\users\vetry\desktop\тусур\тусур 3 семестр\ооп\oop\matrix\matrix.cpp(201): warning C4715: Math::Matrix::operator*=: значение возвращается не при всех путях выполнения
+c:\users\vetry\desktop\тусур\тусур 3 семестр\ооп\oop\matrix\matrix.cpp(222): warning C4717: Math::operator*: рекурсия на всех путях выполнения, функция вызовет переполнение стека
+  main.vcxproj -> C:\Users\vetry\Desktop\ТУСУР\ТУСУР 3 Семестр\ООП\OOP\Matrix\Debug\main.exe
