@@ -46,6 +46,9 @@ namespace Math {
 		// Конструктор копирования
 		Matrix(const Matrix&);
 
+		// Конструктор перемещения
+		Matrix(Matrix&&);
+
 		// Деструктор
 		~Matrix();
 
