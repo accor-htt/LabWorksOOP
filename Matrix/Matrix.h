@@ -38,7 +38,7 @@ namespace Math {
 		Matrix();
 
 		// Конструктор для инициализации квадратной матрицы заданного размера с заданными компонентами
-		Matrix(int = 0, const double* = nullptr);
+		Matrix(int, const double* = nullptr);
 
 		// Конструктор для инициализации прямоугольной матрицы заданных размеров с заданными компонентами
 		Matrix(int, int, const double* = nullptr);
@@ -51,6 +51,9 @@ namespace Math {
 
 		// Деструктор
 		~Matrix();
+
+		// Инициализация
+		void Init(int, int, const double *data = nullptr);
 
 		// Функция получения значения строк
 		int getRow() const;

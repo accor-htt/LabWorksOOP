@@ -5,37 +5,12 @@ using namespace Math;
 
 int Matrix::count = 0;
 
-Matrix::Matrix() {
+Matrix::Matrix(): _row(0), _col(0) {
 	id = ++count;
-	_row = _col = 0;
 	matrix = nullptr;
 	cout << "Constructor #" << id << endl;
 }
 
-Matrix::Matrix(int param, const double *data) {
-	id = ++count;
-	
-	if (param < 0) {
-		throw "Param of matrix #" + to_string(id) + " < 0 ";
-	}
-
-	_col = _row = param;
-	matrix = new double[_row * _col];
-	
-	if (data == nullptr) {
-		for (int i = 0; i < getSize(); i++) {
-			matrix[i] = 0.0;
-		}
-	} else {
-		for (int i = 0; i < getSize(); i++) {
-			matrix[i] = data[i];
-		}
-	}
-
-	cout << "Constructor #" << id << endl;
-}
-
-// Matrix::Matrix(int row, int col, const double *data) : Matrix(1) {
 Matrix::Matrix(int row, int col, const double *data) {
 	id = ++count;
 
@@ -43,30 +18,26 @@ Matrix::Matrix(int row, int col, const double *data) {
 		throw "Rows or cols of matrix #" + to_string(id) + " < 0 ";
 	}
 
-	_col = col;
-	_row = row;
-	matrix = new double[_row * _col];
+	Init(row, col, data);
+	cout << "Constructor #" << id << endl;
+}
 
-	if (data == nullptr) {
-		for (int i = 0; i < getSize(); i++) {
-			matrix[i] = 0.0;
-		}
-	}
-	else {
-		for (int i = 0; i < getSize(); i++) {
-			matrix[i] = data[i];
-		}
+Matrix::Matrix(int param, const double *data) {
+	id = ++count;
+
+	if (param < 0) {
+		throw "Param of matrix #" + to_string(id) + " < 0 ";
 	}
 
+	Init(param, param, data);
 	cout << "Constructor #" << id << endl;
 }
 
 Matrix::Matrix(const Matrix & CopyMatrix) {
 	id = ++count;
-	_row = CopyMatrix._row;
-	_col = CopyMatrix._col;
 
-	matrix = new double[_row * _col];
+	Init(CopyMatrix._row, CopyMatrix._col);
+
 	for (int i = 0; i < getSize(); i++) {
 		matrix[i] = CopyMatrix.matrix[i];
 	}
@@ -75,13 +46,16 @@ Matrix::Matrix(const Matrix & CopyMatrix) {
 
 Math::Matrix::Matrix(Matrix && MoveMatrix) {
 	id = ++count;
-	_row = MoveMatrix._row;
-	_col = MoveMatrix._col;
 
-	matrix = new double[_row * _col];
+	Init(MoveMatrix._row, MoveMatrix._col);
+
 	for (int i = 0; i < getSize(); i++) {
 		matrix[i] = MoveMatrix.matrix[i];
 	}
+	
+	MoveMatrix.matrix = nullptr;
+	MoveMatrix._col = MoveMatrix._row = 0;
+
 	cout << "Move constructor #" << id << endl;
 }
 
@@ -96,13 +70,29 @@ ostream & Math::operator<<(ostream &output, const Matrix &m) {
 	for (int i = 0; i < m._row; i++) {
 		for (int j = 0; j < m._col; j++) {
 			output.width(width);
-			output << m.matrix[i] << " ";
+			output << m.matrix[i * m._col + j] << " ";
 		}
 		output << endl;
 	}
 	output << endl;
 
 	return output;
+}
+
+void Matrix::Init(int row, int col, const double *data) {
+	_col = col;
+	_row = row;
+	matrix = new double[_row * _col];
+
+	if (data == nullptr) {
+		for (int i = 0; i < getSize(); i++) {
+			matrix[i] = 0.0;
+		}
+	} else {
+		for (int i = 0; i < getSize(); i++) {
+			matrix[i] = data[i];
+		}
+	}
 }
 
 int Matrix::getRow() const {
@@ -165,7 +155,6 @@ bool Matrix::CheckMul(const Matrix &m2) const {
 
 	return false;
 }
-
 
 Matrix & Matrix::operator=(const Matrix &m2) {
 	if (getSize() == m2.getSize()) {

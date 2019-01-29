@@ -1,3 +1,3 @@
 ﻿  Matrix.cpp
-c:\users\vetry\desktop\тусур\тусур 3 семестр\ооп\oop\matrix\matrix.cpp(240): warning C4717: Math::operator*: рекурсия на всех путях выполнения, функция вызовет переполнение стека
+c:\users\vetry\desktop\тусур\тусур 3 семестр\ооп\oop\matrix\matrix.cpp(234): warning C4717: Math::operator*: рекурсия на всех путях выполнения, функция вызовет переполнение стека
   main.vcxproj -> C:\Users\vetry\Desktop\ТУСУР\ТУСУР 3 Семестр\ООП\OOP\Matrix\Debug\main.exe

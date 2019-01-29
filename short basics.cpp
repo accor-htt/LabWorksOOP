@@ -39,3 +39,16 @@ int main() {
 
 3) & используется для передачи обьекта в функцию не создавая его копии,
 то есть работа с сылкой на него и тем самым экономия памяти
+
+4) (&&rvalue) ссылка - обьекты могут быть перемещены
+	(&lvalue) (временная) ссылка - всегда копируются
+
+5) . при обращении к элемету через имя обьекта
+	-> при обращении через указатель
+
+6) static - статические поля и методы (доступные только в пределах области класса)
+
+7)
+const tells the compiler that a variable or method is immutable.
+This helps the compiler optimize the code and helps the developer know if a function side effects.
+Also, using const & prevents the compiler from copying data unnecessarily.
